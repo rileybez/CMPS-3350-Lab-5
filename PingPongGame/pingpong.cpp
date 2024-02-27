@@ -15,7 +15,6 @@ struct Paddle {
     int x, y; // Position
     int width, height;
 };
-
 // Function to check collision between ball and paddle
 bool checkCollision(Ball ball, Paddle paddle) {
     return ball.x >= paddle.x &&
@@ -23,7 +22,6 @@ bool checkCollision(Ball ball, Paddle paddle) {
            ball.y >= paddle.y &&
            ball.y <= paddle.y + paddle.height;
 }
-
 int main() {
     Display* display = XOpenDisplay(nullptr);
     if (!display) {
