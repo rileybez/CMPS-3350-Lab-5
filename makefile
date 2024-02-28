@@ -1,16 +1,32 @@
+# Makefile for ping_pong
+
+# Compiler
 CXX = g++
-CXXFLAGS = -Wall -Wextra -pedantic -std=c++11
 
-# Include SDL2 compiler flags and linker flags
-SDL_CFLAGS := $(shell sdl2-config --cflags)
-SDL_LIBS := $(shell sdl2-config --libs)
+# Compiler flags
+CXXFLAGS =
 
-# Target: test
-test: test.cpp
-	$(CXX) $(CXXFLAGS) -o $@ $< $(SDL_CFLAGS) $(SDL_LIBS)
+# Source file
+SRC = pingpong.cpp
 
-.PHONY: clean
+# Executable name
+EXEC = ping_pong
 
+# Libraries
+LIBS = -lX11
+
+# Make all rule
+all: $(EXEC)
+
+# Compile rule
+$(EXEC): $(SRC)
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
+
+# Clean rule
 clean:
-	rm -f test
+	rm -f $(EXEC)
+
+# Run rule
+run: $(EXEC)
+	./$(EXEC)
 
