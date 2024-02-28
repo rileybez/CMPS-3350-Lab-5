@@ -74,13 +74,13 @@ int main() {
             if (event.type == KeyPress) {
                 KeySym key = XLookupKeysym(&event.xkey, 0);
                 if (key == XK_w) {
-                    player1.y -= 10;
+                    player1.y -= 25;
                 } else if (key == XK_s) {
-                    player1.y += 10;
+                    player1.y += 25;
                 } else if (key == XK_Up) {
-                    player2.y -= 10;
+                    player2.y -= 25;
                 } else if (key == XK_Down) {
-                    player2.y += 10;
+                    player2.y += 25;
                 }
             }
         }
@@ -130,8 +130,33 @@ int main() {
         XDrawString(display, window, gc, 10, 20, player1_score.c_str(), player1_score.length());
         XDrawString(display, window, gc, 385, 20, player2_score.c_str(), player2_score.length());
 
+        std::string gameover = "GAME OVER";
+        if (player1_point == 10)
+        {
+
+            XDrawString(display, window, gc, 225, 110, gameover.c_str(), gameover.length());
+            std::string player1_wins = "PLAYER 1 WINS";
+            XDrawString(display, window, gc, 215, 130, player1_wins.c_str(), player1_wins.length());
+
+            XFlush(display);
+            usleep(5000000);
+            running = false;
+        }
+        if (player2_point == 10)
+        {
+
+            XDrawString(display, window, gc, 225, 110, gameover.c_str(), gameover.length());
+            std::string player2_wins = "PLAYER 2 WINS";
+            XDrawString(display, window, gc, 215, 130, player2_wins.c_str(), player2_wins.length());
+
+            XFlush(display);
+            usleep(5000000);
+            running = false;
+        }
+
         XFlush(display);
         usleep(10000); // 10 ms
+
     }
 
     XCloseDisplay(display);
