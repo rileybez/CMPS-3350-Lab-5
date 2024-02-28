@@ -18,9 +18,9 @@ struct Paddle {
 // Function to check collision between ball and paddle
 bool checkCollision(Ball ball, Paddle paddle) {
     return ball.x >= paddle.x &&
-           ball.x <= paddle.x + paddle.width &&
-           ball.y >= paddle.y &&
-           ball.y <= paddle.y + paddle.height;
+        ball.x <= paddle.x + paddle.width &&
+        ball.y >= paddle.y &&
+        ball.y <= paddle.y + paddle.height;
 }
 int main() {
     Display* display = XOpenDisplay(nullptr);
@@ -31,9 +31,9 @@ int main() {
 
     int screen = DefaultScreen(display);
     Window window = XCreateSimpleWindow(display, RootWindow(display, screen),
-                                        10, 10, 500, 300, 1,
-                                        BlackPixel(display, screen),
-                                        WhitePixel(display, screen));
+            10, 10, 500, 300, 1,
+            BlackPixel(display, screen),
+            WhitePixel(display, screen));
 
     XSelectInput(display, window, KeyPressMask);
     XMapWindow(display, window);
@@ -63,6 +63,9 @@ int main() {
     player2.y = 100;
     player2.width = 10;
     player2.height = 60;
+
+    int player1_point = 0;
+    int player2_point = 0;
 
     // Game loop
     while (running) {
@@ -94,8 +97,18 @@ int main() {
         // Check collision with paddles
         if (checkCollision(ball, player1) || checkCollision(ball, player2)) {
             ball.xdir = -ball.xdir;
+        }
         // Check for scoring
         if (ball.x <= 0 || ball.x >= 500 - ball.size) {
+
+            if (ball.x <= 0)
+            {
+                player2_point++;
+            }
+            else if (ball.x >= 500 - ball.size)
+            {
+                player1_point++;
+            }
             ball.x = 250;
             ball.y = 150;
             ball.xdir = -ball.xdir;
@@ -111,6 +124,12 @@ int main() {
         XFillRectangle(display, window, gc, player1.x, player1.y, player1.width, player1.height);
         XFillRectangle(display, window, gc, player2.x, player2.y, player2.width, player2.height);
 
+        //Draw score
+        std::string player1_score = "Player 1 Score: " + std::to_string(player1_point);
+        std::string player2_score = "Player 2 Score: " + std::to_string(player2_point);
+        XDrawString(display, window, gc, 10, 20, player1_score.c_str(), player1_score.length());
+        XDrawString(display, window, gc, 10, 20, player2_score.c_str(), player2_score.length());
+
         XFlush(display);
         usleep(10000); // 10 ms
     }
@@ -119,4 +138,4 @@ int main() {
     return 0;
 }
 
-                                                
+
