@@ -128,7 +128,7 @@ int main() {
         std::string player1_score = "Player 1 Score: " + std::to_string(player1_point);
         std::string player2_score = "Player 2 Score: " + std::to_string(player2_point);
         XDrawString(display, window, gc, 10, 20, player1_score.c_str(), player1_score.length());
-        XDrawString(display, window, gc, 10, 20, player2_score.c_str(), player2_score.length());
+        XDrawString(display, window, gc, 385, 20, player2_score.c_str(), player2_score.length());
 
         XFlush(display);
         usleep(10000); // 10 ms
