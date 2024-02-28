@@ -1,7 +1,7 @@
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <iostream>
-#include <unistd.h> // for usleep()
+#include <unistd.h> 
 
 // Ball structure
 struct Ball {
