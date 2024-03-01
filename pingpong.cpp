@@ -2,6 +2,7 @@
 #include <X11/keysym.h>
 #include <iostream>
 #include <unistd.h> // for usleep()
+#include <cstdlib> 
 
 // Ball structure
 struct Ball {
@@ -17,11 +18,15 @@ struct Paddle {
 };
 // Function to check collision between ball and paddle
 bool checkCollision(Ball ball, Paddle paddle) {
-    return ball.x >= paddle.x &&
+   return ball.x >= paddle.x &&
         ball.x <= paddle.x + paddle.width &&
         ball.y >= paddle.y &&
         ball.y <= paddle.y + paddle.height;
 }
+
+
+void changeColor(Display* display, Window window);
+
 int main() {
     Display* display = XOpenDisplay(nullptr);
     if (!display) {
@@ -96,7 +101,8 @@ int main() {
 
         // Check collision with paddles
         if (checkCollision(ball, player1) || checkCollision(ball, player2)) {
-            ball.xdir = -ball.xdir;
+             ball.xdir = -ball.xdir;
+            changeColor(display, window);
         }
         // Check for scoring
         if (ball.x <= 0 || ball.x >= 500 - ball.size) {
@@ -161,6 +167,21 @@ int main() {
 
     XCloseDisplay(display);
     return 0;
+}
+
+// Function that changes color of the background when ball hits paddle
+void changeColor(Display* display, Window window)
+{
+    int color1 = rand() % 256;
+    int color2 = rand() % 256;
+    int color3 = rand() % 256;
+
+     XSetWindowAttributes attr;
+     attr.background_pixel = color1 << 16 | color2 << 8 | color3;
+     XChangeWindowAttributes(display, window, CWBackPixel, &attr);
+
+     XClearWindow(display, window);
+     XFlush(display);
 }
 
 
