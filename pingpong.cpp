@@ -1,8 +1,9 @@
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <iostream>
-#include <unistd.h> // for usleep()
+#include <unistd.h> 
 #include <cstdlib> 
+ 
 
 // Ball structure
 struct Ball {
@@ -16,6 +17,7 @@ struct Paddle {
     int x, y; // Position
     int width, height;
 };
+
 // Function to check collision between ball and paddle
 bool checkCollision(Ball ball, Paddle paddle) {
    return ball.x >= paddle.x &&
