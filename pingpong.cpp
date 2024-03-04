@@ -4,7 +4,6 @@
 #include <unistd.h> 
 #include <cstdlib> 
  
-
 // Ball structure
 struct Ball {
     int x, y; // Position
