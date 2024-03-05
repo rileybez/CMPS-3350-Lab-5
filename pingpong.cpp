@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <X11/Xutil.h> 
+
 struct Ball {
     int x, y; 
     int xdir, ydir; 
