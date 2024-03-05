@@ -25,7 +25,6 @@ bool checkCollision(Ball ball, Paddle paddle) {
         ball.y <= paddle.y + paddle.height;
 }
 
-
 void changeColor(Display* display, Window window);
 
 int main() {
