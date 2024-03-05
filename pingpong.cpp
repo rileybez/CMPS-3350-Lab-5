@@ -3,22 +3,17 @@
 #include <iostream>
 #include <unistd.h>
 #include <cstdlib>
-#include <X11/Xutil.h> // For XTextItem structure
-
-// Ball structure
+#include <X11/Xutil.h> 
 struct Ball {
-    int x, y; // Position
-    int xdir, ydir; // Direction
+    int x, y; 
+    int xdir, ydir; 
     int size;
 };
-
-// Paddle structure
 struct Paddle {
     int x, y; // Position
     int width, height;
 };
 
-// Function to check collision between ball and paddle
 bool checkCollision(Ball ball, Paddle paddle) {
     return ball.x >= paddle.x &&
            ball.x <= paddle.x + paddle.width &&
@@ -28,16 +23,12 @@ bool checkCollision(Ball ball, Paddle paddle) {
 
 void changeColor(Display* display, Window window);
 
-// Function to move AI-controlled paddle (Player 1)
 void moveAutoPaddle(Ball ball, Paddle &paddle) {
-    // Adjust paddle position based on ball position
     if (ball.y < paddle.y + paddle.height / 2) {
         paddle.y -= 2; // Move up
     } else {
         paddle.y += 2; // Move down
     }
-
-    // Limit paddle movement within window bounds
     if (paddle.y < 0) {
         paddle.y = 0;
     }
@@ -202,21 +193,17 @@ int main() {
         }
 
         XFlush(display);
-        usleep(10000); // 10 ms
+        usleep(8000); // 10 ms
 
     }
 
     XCloseDisplay(display);
     return 0;
 }
-
-// Function that changes color of the background when ball hits paddle
-void changeColor(Display* display, Window window)
-{
-    int color1 = rand() % 256;
-    int color2 = rand() % 256;
-    int color3 = rand() % 256;
-
+void changeColor(Display* display, Window window){
+    int color1 = 200 + rand() % 56;
+    int color2 = 200 + rand() % 56;
+    int color3 = 200 + rand() % 56;
      XSetWindowAttributes attr;
      attr.background_pixel = color1 << 16 | color2 << 8 | color3;
      XChangeWindowAttributes(display, window, CWBackPixel, &attr);
@@ -224,4 +211,3 @@ void changeColor(Display* display, Window window)
      XClearWindow(display, window);
      XFlush(display);
 }
-
