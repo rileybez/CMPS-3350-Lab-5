@@ -3,3 +3,5 @@
 g++ -o ping_pong pingpong.cpp -lX11
 ./ping_pong
 ```
+## Display preview 
+<img width="499" alt="1" src="https://github.com/rileybez/CMPS-3350-Lab-5/assets/92348180/9f95b9f9-4514-47a1-bdf4-e7ca5e110658">
