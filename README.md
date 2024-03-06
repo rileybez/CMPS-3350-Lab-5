@@ -1,3 +1,6 @@
+
+It is suggested to use XQuartz for Mac or XMing for Windows when executing program
+
 ## Run command
 ```
 g++ -o ping_pong pingpong.cpp -lX11
