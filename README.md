@@ -2,6 +2,7 @@
 It is suggested to download use the applications XQuartz for Mac or Xming for Windows when executing program
 
 XQuartz: https://www.xquartz.org
+
 Xming: https://sourceforge.net/projects/xming/
 
 ## Run command
